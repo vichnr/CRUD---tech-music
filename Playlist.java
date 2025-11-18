@@ -30,9 +30,33 @@ public class Playlist{
 
     public int getId(){return id; }
     public String getNome(){return nome;}
-    public List<Musica>getMusicas(){ return new ArrayList<>(musicas); }
+    public List<Musica>getMusicas(){return new ArrayList<>(musicas); }
+
+    public void mostrarMusicas(){
+        if (musicas.isEmpty()){
+            System.out.println("Playlist vazia");
+            return;
+        }
+
+        System.out.println("Musicas na playlist '" + nome + "':");
+        for (int i=0; i< musicas.size(); i++) {
+            Musica musica= musicas.get(i);
+            String duracao= formatarDuracao(musica.getDuracao());
+            System.out.println((i + 1) + ". " +musica.getTitulo()+ " - " + musica.getArtista()+ " (" + duracao + ")");
+        }
+        System.out.println("Duracao total: "+ formatarDuracao(getDuracaoTotal()));
+    }
+
+    private String formatarDuracao(int segundos){
+        int minutos=segundos/60;
+        int segundosRestantes=segundos %60;
+        return minutos + ":" + String.format("%02d", segundosRestantes);
+    }
+
 
     public String toString(){
         return String.format("Playlist [%d] %s | %d músicas", id, nome, musicas.size());
+
     }
+
 }
