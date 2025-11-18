@@ -1,19 +1,28 @@
-import java.util.HashMap;
 
 public class Usuario {
     private String email;
     private String senha;
-    private String nick_name;
+    private String nick;
 
     public Usuario(String email, String nick_name, String senha){
-        this.nick_name =nick_name;
+        this.nick =nick_name;
         this.email=email;
         this.senha=senha;
 
     }
 
-    public void setUsuarios(){
-
+    public String getEmail() {
+        return email;
     }
+
+    public String getNick() {
+        return nick;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+
 
 }
