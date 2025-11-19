@@ -1,4 +1,6 @@
-public class Musica {
+import java.io.Serializable;
+
+public class Musica implements Serializable {
     private int id;
     private String titulo;
     private String artista;
@@ -32,6 +34,7 @@ public class Musica {
     public String getGenero(){
         return genero;
     }
+
     public String toString(){
         return "Musica{" +
                 "id=" + id+
