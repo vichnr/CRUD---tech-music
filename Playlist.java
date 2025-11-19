@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
 
-public class Playlist{
+public class Playlist implements Serializable {
     private int id;
     private String nome;
     private List<Musica>musicas;
@@ -53,10 +54,7 @@ public class Playlist{
         return minutos + ":" + String.format("%02d", segundosRestantes);
     }
 
-
     public String toString(){
         return String.format("Playlist [%d] %s | %d músicas", id, nome, musicas.size());
-
     }
-
 }
