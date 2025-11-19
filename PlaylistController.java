@@ -1,31 +1,42 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PlaylistController{
-    private List<Playlist>playlists;
-    private int nextId;
+    private Map<String, List<Playlist>> playlistsPorUsuario;
+    private Map<String, Integer> nextIds;
 
     public PlaylistController(){
-        this.playlists=new ArrayList<>();
-        this.nextId =1;
+        this.playlistsPorUsuario = new HashMap<>();
+        this.nextIds = new HashMap<>();
     }
 
-    public Playlist criarPlaylist(String nome){
-        Playlist playlist= new Playlist(nextId,nome);
-        playlists.add(playlist);
-        nextId++;
+
+    public Playlist criarPlaylist(String emailUsuario, String nome){
+
+        List<Playlist> playlistsUsuario = playlistsPorUsuario
+                .computeIfAbsent(emailUsuario, k -> new ArrayList<>());
+        int nextId = nextIds.getOrDefault(emailUsuario, 1);
+        Playlist playlist = new Playlist(nextId, nome);
+        playlistsUsuario.add(playlist);
+
+        nextIds.put(emailUsuario, nextId + 1);
         return playlist;
     }
 
-    public void adicionarMusica(int playlistId,Musica musica){
-        Playlist playlist= buscarPlaylistPorId(playlistId);
+
+    public void adicionarMusica(String emailUsuario, int playlistId, Musica musica){
+
+        Playlist playlist = buscarPlaylistPorId(emailUsuario, playlistId);
         if (playlist!= null){
             playlist.adicionarMusica(musica);
         }
     }
 
-    public boolean removerMusicaPorPosicao(int playlistId, int posicao){
-        Playlist playlist= buscarPlaylistPorId(playlistId);
+    public boolean removerMusicaPorPosicao(String emailUsuario, int playlistId, int posicao){
+
+        Playlist playlist = buscarPlaylistPorId(emailUsuario, playlistId);
         if (playlist!= null && posicao>= 0 && posicao <playlist.getMusicas().size()){
             Musica musica= playlist.getMusicas().get(posicao);
             playlist.removerMusica(musica);
@@ -34,25 +45,35 @@ public class PlaylistController{
         return false;
     }
 
-    public boolean excluirPlaylist(int playlistId){
-        Playlist playlist= buscarPlaylistPorId(playlistId);
-        if (playlist!= null) {
-            playlists.remove(playlist);
-            return true;
+    public boolean excluirPlaylist(String emailUsuario, int playlistId){
+
+        List<Playlist> playlistsUsuario = playlistsPorUsuario.get(emailUsuario);
+        if (playlistsUsuario != null) {
+            Playlist playlist = buscarPlaylistPorId(emailUsuario, playlistId);
+            if (playlist != null) {
+                playlistsUsuario.remove(playlist);
+                return true;
+            }
         }
         return false;
     }
 
-    public Playlist buscarPlaylistPorId(int id){
-        for (Playlist playlist: playlists) {
-            if (playlist.getId()== id) {
-                return playlist;
+    public Playlist buscarPlaylistPorId(String emailUsuario, int id){
+
+        List<Playlist> playlistsUsuario = playlistsPorUsuario.get(emailUsuario);
+        if (playlistsUsuario != null) {
+            for (Playlist playlist : playlistsUsuario) {
+                if (playlist.getId() == id) {
+                    return playlist;
+                }
             }
         }
         return null;
     }
-    public List<Playlist> listarPlaylists(){
-        return new ArrayList<>(playlists);
+
+    public List<Playlist> listarPlaylists(String emailUsuario){
+        return new ArrayList<>(playlistsPorUsuario.getOrDefault(emailUsuario, new ArrayList<>()));
+
     }
 
 
