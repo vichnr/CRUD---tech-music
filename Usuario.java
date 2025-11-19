@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class Usuario {
+public class Usuario implements Serializable{
     private String email;
     private String senha;
     private String nick;
@@ -22,6 +23,7 @@ public class Usuario {
     public String getSenha() {
         return senha;
     }
+
 
 
 
