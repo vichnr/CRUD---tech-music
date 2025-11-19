@@ -34,6 +34,15 @@ public class PlaylistController{
         return false;
     }
 
+    public boolean excluirPlaylist(int playlistId){
+        Playlist playlist= buscarPlaylistPorId(playlistId);
+        if (playlist!= null) {
+            playlists.remove(playlist);
+            return true;
+        }
+        return false;
+    }
+
     public Playlist buscarPlaylistPorId(int id){
         for (Playlist playlist: playlists) {
             if (playlist.getId()== id) {
