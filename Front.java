@@ -100,10 +100,17 @@ public class Front {
                             if (u.getSenha().equals(senhaText)) {
                                 usuarioLogado = u;
                                 janela_usuario.setVisible(false);
-                                new DeezerTela(usuarioLogado);
+                                DeezerTela deezerTela = new DeezerTela(usuarioLogado);
+                                deezerTela.setVisible(true);
 
 
                             }
+                            else{JOptionPane.showMessageDialog(janela_usuario,
+                                    "Senha incorreta!");
+                            }
+                        }
+                        else{JOptionPane.showMessageDialog(janela_usuario,
+                                "Esse usuario não existe");
                         }
 
 
@@ -187,14 +194,38 @@ public class Front {
                         confirmar_cadastro.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
+
+
                                 String emailText = email_usuario.getText();
+                                if (!emailText.contains("@")){
+                                    JOptionPane.showMessageDialog(janela_cadastro,
+                                            "É necessário um email com dóminio, ex: @gmail.com");
+                                    return;
+                                }
+
                                 String nickText = nick_name.getText();
                                 String senhaText = senha_usuario.getText();
+                                if (senhaText.length()<8){
+                                    JOptionPane.showMessageDialog(janela_cadastro,
+                                            "Sua senha tem que ter no mínimo 8 caracteres");
+                                    return;
+
+                                }
+                                if(senhaText.isEmpty() || nickText.isEmpty() || emailText.isEmpty()){
+                                    JOptionPane.showMessageDialog(janela_cadastro,
+                                            "Algum dos campos está vazio, é necessário preencher todos.");
+                                    return;
+
+                                }
+
 
                                 if (usuarios.containsKey(emailText)) {
                                     JOptionPane.showMessageDialog(janela_cadastro,
                                             "Esse email já está cadastrado!");
                                     return;
+                                }
+                                else{JOptionPane.showMessageDialog(janela_cadastro,
+                                        "Usuario cadastrado!");
                                 }
 
 

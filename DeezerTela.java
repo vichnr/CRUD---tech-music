@@ -26,6 +26,7 @@ public class DeezerTela extends JFrame {
     private JLabel playlistSelecionadaLabel;
     private Playlist playlistAtual;
 
+
     public DeezerTela(Usuario usuario){
         this.usuario= usuario;
         this.playlistController= new PlaylistController();
