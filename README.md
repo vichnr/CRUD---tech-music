@@ -2,7 +2,7 @@
 Este projeto está sendo desenvolvido pelas alunas: Crislany Victória e Joana Clemente, como requisito para obtenção de nota na matéria de Laboratório de Programção, orientado pelo professor Marcos Vinícius Silva Bento do curso de Ciência da computação na instituição AFYA CENTRO localizada com Maceió - AL. 
 
 PDF do relatório sobre o projeto Tech Music solicitado pelo professor Marcos Vinicius (anexado para download):
-[Baixar o relatório em PDF](https://drive.google.com/file/d/1Li_pnLaj7F8D8dswbWAhtT-qfLxTY_8q/view?usp=sharing)
+[Baixar o relatório em PDF](https://drive.google.com/file/d/1IsQHm91mgZk3xL1M8Y9sFoQSEUDDtrG3/view?usp=sharing)
 
 
 DIAGRAMA DE CLASSES UML DO CÓDIGO
