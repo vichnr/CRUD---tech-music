@@ -72,7 +72,7 @@ public class Front {
                 email_usuario.setBounds(50,160,400,35);
                 janela_usuario.add(email_usuario);
 
-                JTextField senha_usuario= new JTextField();
+                JPasswordField senha_usuario = new JPasswordField();
                 senha_usuario.setBounds(50,260,400,35);
 
                 janela_usuario.add(senha_usuario);
@@ -91,7 +91,7 @@ public class Front {
                 botao_entrar.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        String senhaText = senha_usuario.getText();
+                        String senhaText = new String(senha_usuario.getPassword());
                         String emailText = email_usuario.getText();
 
                         if (usuarios.containsKey(emailText)) {
@@ -182,7 +182,7 @@ public class Front {
                         senha.setFont(new Font("Arial",Font.BOLD,28));
                         janela_cadastro.add(senha);
 
-                        JTextField senha_usuario = new JTextField();
+                        JPasswordField senha_usuario = new JPasswordField();
                         senha_usuario.setBounds(50,300,400,35);
                         janela_cadastro.add(senha_usuario);
 
@@ -204,7 +204,7 @@ public class Front {
                                 }
 
                                 String nickText = nick_name.getText();
-                                String senhaText = senha_usuario.getText();
+                                String senhaText = new String(senha_usuario.getPassword());
                                 if (senhaText.length()<8){
                                     JOptionPane.showMessageDialog(janela_cadastro,
                                             "Sua senha tem que ter no mínimo 8 caracteres");
